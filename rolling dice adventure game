@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <string.h>
+#include<iostream>
+
+using namespace std;
+class Assignment{
+//Let health be
+int health = 20;
+int totalTreasure;
+public:
+void Story(){
+  cout<<"you wake up from a inspiring dream that awakens an ambishious feeling inside you to be like you father. To go out in the world and claim treasure!";
+cout<<"\nDo you want to gain treasure while going on anadventure?"<<endl;
+AskYesNo();
+}
+
+void AskYesNo(){
+cout<<"1. Press 1 for Yes"<<endl<<"2.Press 2 for No"<<endl;
+int s;
+cin >> s;
+if (s == 2){
+Ending();
+}
+else if (s == 1){
+Adventure();
+}
+}
+
+void Adventure(){
+int attack;
+int block;
+int treasure;
+  int sum;
+  int damage;
+attack = RollDie();
+block = RollDie();
+treasure = RollDie();
+  if (block>attack){
+    damage = 0;
+  }
+  sum = block - attack;
+  if(block>=attack)
+cout<<"Successful block! "<<damage<<" health lost"<<endl;
+if (attack <= block){
+totalTreasure += treasure;
+cout<<" Total treasure: "<<totalTreasure<<endl;
+  cout<<"Health remaining: "<<health<<endl;
+Story();
+}
+else if((attack - block) <= health){
+health -= attack - block;
+cout<<"you lost "<<sum<<"hp\nHealth remaining: "<<health<<"\nTotal treasure: "<<totalTreasure<<endl;
+Story();
+}
+else{
+cout<<"Health critically low"<<endl;
+Ending();
+}
+}
+
+int RollDie(){
+int sides = 6;
+sides = rand()%((6 - 1) + 1) + 1;
+return sides;
+}
+
+void Ending(){
+  cout<<"When you get home your mom is waiting for you with fresh baked cookies to congratulate your return home."<<endl;
+cout<<"Health remaining: "<<health<<endl;
+cout<<"Total treasure: "<<totalTreasure<<endl;
+}
+};
+
+int main()
+{
+Assignment a;
+a.Story();
+return 0;
+}
